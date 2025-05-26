@@ -1,4 +1,10 @@
-var station1 = new L.LayerGroup();
+var station1 = new L.LayerGroup(); var station2 = new L.LayerGroup();
+var station3 = new L.LayerGroup(); var station4 = new L.LayerGroup();
+var station5 = new L.LayerGroup(); var station6 = new L.LayerGroup();
+var station7 = new L.LayerGroup(); var station8 = new L.LayerGroup();
+var station9 = new L.LayerGroup(); var station10 = new L.LayerGroup();
+var station11 = new L.LayerGroup(); var station12 = new L.LayerGroup();
+
 
 var loyal = new L.LayerGroup();
 var borders = new L.LayerGroup();
@@ -21,11 +27,7 @@ var osmBw = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
     attribution: mbAttr
 });
 
-var map = L.map('map', {
-    layers: [osm, station1, borders],
-    center: [x, y],
-    zoom: 8
-});
+
 
 var runLayer = omnivore.kml(assetPath('../kml/CM_bound-25-amp.kml')).on('ready', function () {
     this.setStyle({
@@ -51,7 +53,7 @@ var pinMO = L.icon({
     popupAnchor: [0, 0]
 });
 
-var amp = ["ดอยเต่า"];
+var amp = ["เมืองเชียงใหม่", "สันกำแพง", "แม่ริม", "สันทราย", "ดอยสะเก็ด", "แม่ออน", "สารภี", "หางดง", "สันป่าตอง", "ดอยหล่อ", "แม่วาง", "สะเมิง"];
 
 function checkname(name) {
     return name ?? "- ";
@@ -77,7 +79,10 @@ function addPin(ampName, i, mo) {
 var mo = window.matchMedia("(max-width: 700px)").matches ? 0 : 1;
 
 // เพิ่ม Pin
-addPin(station1, 0, mo);
+for (let i = 0; i < amp.length; i++) {
+    window["station" + (i + 1)] = new L.LayerGroup();
+    addPin(window["station" + (i + 1)], i, mo);
+}
 
 // Layers Control
 var baseTree = {
@@ -89,13 +94,8 @@ var baseTree = {
     ]
 };
 
-
-
 var children = [];
 for (let i = 0; i < amp.length; i++) {
-    // ข้าม index ที่ไม่มี station (เช่น i == 6 ไม่มี station7)
-    if (i === 6) continue;
-
     children.push({
         label: " " + amp[i],
         layer: window["station" + (i + 1)]
@@ -107,6 +107,13 @@ var overlays = [{
     selectAllCheckbox: true,
     children: children
 }];
+
+
+var map = L.map('map', {
+    layers: [osm, station1, station2, station3, station4, station5, station6, station7, station8, station9, station10, station11, station12, borders],
+    center: [x, y],
+    zoom: 8
+});
 
 var ctl = L.control.layers.tree(baseTree, null);
 ctl.addTo(map).collapseTree().expandSelected();
