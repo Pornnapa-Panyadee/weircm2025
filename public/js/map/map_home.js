@@ -15,13 +15,13 @@ var y = 98.656525;
 var mbAttr = 'Mae Ping Basin',
     mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidmFucGFueWEiLCJhIjoiY2loZWl5ZnJ4MGxnNHRwbHp5bmY4ZnNxOCJ9.IooQB0jYS_4QZvIq7gkjeQ';
 
-var osm = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+var osm = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
     attribution: mbAttr
 });
 
-var osmBw = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+var osmBw = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
     attribution: mbAttr
@@ -120,5 +120,6 @@ ctl.addTo(map).collapseTree().expandSelected();
 ctl.setOverlayTree(overlays).collapseTree(true).expandSelected(true);
 
 function assetPath(path) {
-    return document.querySelector('meta[name="asset-path"]').getAttribute('content') + path;
+    const base = document.querySelector('meta[name="asset-path"]').getAttribute('content');
+    return new URL(path, window.location.origin + base).toString();
 }
