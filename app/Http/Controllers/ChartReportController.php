@@ -31,117 +31,81 @@ class ChartReportController extends Controller
     public function score(Request $request)
     {
         $amp = $request->amp;
-        if($amp=="sum"){
-            $apiUrl = 'https://watercenter.scmc.cmu.ac.th/weir/jang_basin/api/chart/sum';
-        }else{
-            if($amp=="เกาะคา1"){$amp="เกาะคา";};
-            $apiUrl = 'https://watercenter.scmc.cmu.ac.th/weir/jang_basin/api/chart/'.$amp;
-        }
-        $response = Http::get($apiUrl);
-        $data = $response->json();
-        
-        // dd($data[0]['result'][0]['score_N']);
+          
         // count Score สภาพฝาย 
         if ($amp == "sum") {
-            $score_N = Impovement::select('*')->where('improve_type', '1')->get() ;
+            $score_N = Impovement::select('*')->where('improve_type', '1')->get();
             $score_O = Impovement::select('*')->where('improve_type', '2')->get();
             $score_R = Impovement::select('*')->where('improve_type', '3')->get();
-            
         } else {
             $score_N = Impovement::select('*')->where('improve_type', '1')->where('weir_amp', $amp)->get();
             $score_O = Impovement::select('*')->where('improve_type', '2')->where('weir_amp', $amp)->get();
             $score_R = Impovement::select('*')->where('improve_type', '3')->where('weir_amp', $amp)->get();
         }
 
-        
-        if($amp=="sum"){
-            $score_N = $score_N->count() + $data[0]['result'][0]['score_N'] ;
-            $score_O = $score_O->count() + $data[0]['result'][0]['score_O'] ;
-            $score_R = $score_R->count() + $data[0]['result'][0]['score_R'] ;
-        }elseif($amp=="แม่เมาะ"|| $amp=="แม่ทะ" || $amp=="เกาะคา1" ){
-            $score_N = $data[0]['result'][0]['score_N'] ;
-            $score_O = $data[0]['result'][0]['score_O'] ;
-            $score_R = $data[0]['result'][0]['score_R'] ;
-        }else{
-            $score_N = $score_N->count() ;
-            $score_O = $score_O->count() ;
-            $score_R = $score_R->count() ;
+        $sum = $score_N->count() + $score_O->count() + $score_R->count();
+        if ($sum == 0) {
+            $sum = 1; // To avoid division by zero
         }
-
-        $sum = $score_N+ $score_O + $score_R;
-
-        // dd($sum );
 
         $result[] = [
             'amp' => $amp,
-            'score_N' => $score_N,
-            'score_O' => $score_O,
-            'score_R' => $score_R,
-            'scoreper_N' => number_format($score_N / $sum * 100, 1, '.', ''),
-            'scoreper_O' => number_format($score_O / $sum * 100, 1, '.', ''),
-            'scoreper_R' => number_format($score_R / $sum * 100, 1, '.', ''),
+            'score_N' => $score_N->count(),
+            'score_O' => $score_O->count(),
+            'score_R' => $score_R->count(),
+            'scoreper_N' => number_format($score_N->count() / $sum * 100, 1, '.', ''),
+            'scoreper_O' => number_format($score_O->count() / $sum * 100, 1, '.', ''),
+            'scoreper_R' => number_format($score_R->count() / $sum * 100, 1, '.', ''),
         ];
-        $countNum = [["ใช้งานได้ดี", $score_N], ["ปานกลาง ควรซ่อมแซมปรับปรุง", $score_O], ["ทรุดโทรม ควรรื้อถอน/ก่อสร้างใหม่", $score_R]];
+        $countNum = [["ใช้งานได้ดี", $score_N->count()], ["ปานกลาง ควรซ่อมแซมปรับปรุง", $score_O->count()], ["ทรุดโทรม ควรรื้อถอน/ก่อสร้างใหม่", $score_R->count()]];
         
         $e = [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]];
-        
         if ($amp == "sum") {
-            // dd($data[0]['e'][0][1]);
             for ($i = 0; $i < 3; $i++) {
-                $e[$i][1] = UpprotectionInv::select('*')->where('section_status',$i+1)->get()->count() + $data[0]['e'][$i][1] ;
-                $e[$i][2] = UpconcreteInv::select('*')->where('section_status',$i+1)->get()->count()+ $data[0]['e'][$i][2] ;
-                $e[$i][3] = ControlInv::select('*')->where('section_status',$i+1)->get()->count()+ $data[0]['e'][$i][3] ;
-                $e[$i][4] = DownconcreteInv::select('*')->where('section_status',$i+1)->get()->count()+ $data[0]['e'][$i][4] ;
-                $e[$i][5] = DownprotectionInv::select('*')->where('section_status',$i+1)->get()->count()+ $data[0]['e'][$i][5] ;
-                $e[$i][6] = WaterdeliveryInv::select('*')->where('section_status',$i+1)->get()->count()+ $data[0]['e'][$i][6] ;
+                $e[$i][1] = UpprotectionInv::select('*')->where('section_status',$i+1)->get()->count();
+                $e[$i][2] = UpconcreteInv::select('*')->where('section_status',$i+1)->get()->count();
+                $e[$i][3] = ControlInv::select('*')->where('section_status',$i+1)->get()->count();
+                $e[$i][4] = DownconcreteInv::select('*')->where('section_status',$i+1)->get()->count();
+                $e[$i][5] = DownprotectionInv::select('*')->where('section_status',$i+1)->get()->count();
+                $e[$i][6] = WaterdeliveryInv::select('*')->where('section_status',$i+1)->get()->count();
             }
-            
-        }elseif($amp=="แม่เมาะ"|| $amp=="แม่ทะ" || $amp=="เกาะคา1" ){
-            $e[0]=$data[0]['e'][1];
-            $e[1]=$data[0]['e'][2];
-            $e[2]=$data[0]['e'][3];
-            // dd($e);
         }else {
             for ($i = 1; $i < 6; $i++) {
-                $eq[$i][1] = DB::table('upprotection_invs')
+                $e[$i][1] = DB::table('upprotection_invs')
                             ->join('weir_surveys', 'upprotection_invs.weir_id', '=', 'weir_surveys.weir_id')
                             ->join('weir_locations', 'weir_surveys.weir_location_id', '=', 'weir_locations.weir_location_id')
                             ->select('weir_surveys.weir_id')->where('weir_locations.weir_district',$amp)->where('upprotection_invs.section_status',$i)->get()->count();
-                $eq[$i][2] = DB::table('upconcrete_invs')
+                $e[$i][2] = DB::table('upconcrete_invs')
                             ->join('weir_surveys', 'upconcrete_invs.weir_id', '=', 'weir_surveys.weir_id')
                             ->join('weir_locations', 'weir_surveys.weir_location_id', '=', 'weir_locations.weir_location_id')
                             ->select('weir_surveys.weir_id')->where('weir_locations.weir_district',$amp)->where('upconcrete_invs.section_status',$i)->get()->count();
 
 
-                $eq[$i][3] = DB::table('control_invs')
+                $e[$i][3] = DB::table('control_invs')
                             ->join('weir_surveys', 'control_invs.weir_id', '=', 'weir_surveys.weir_id')
                             ->join('weir_locations', 'weir_surveys.weir_location_id', '=', 'weir_locations.weir_location_id')
                             ->select('weir_surveys.weir_id')->where('weir_locations.weir_district',$amp)->where('control_invs.section_status',$i)->get()->count();
 
-                $eq[$i][4] = DB::table('downconcrete_invs')
+                $e[$i][4] = DB::table('downconcrete_invs')
                             ->join('weir_surveys', 'downconcrete_invs.weir_id', '=', 'weir_surveys.weir_id')
                             ->join('weir_locations', 'weir_surveys.weir_location_id', '=', 'weir_locations.weir_location_id')
                             ->select('weir_surveys.weir_id')->where('weir_locations.weir_district',$amp)->where('downconcrete_invs.section_status',$i)->get()->count();
 
-                $eq[$i][5] = DB::table('downprotection_invs')
+                $e[$i][5] = DB::table('downprotection_invs')
                             ->join('weir_surveys', 'downprotection_invs.weir_id', '=', 'weir_surveys.weir_id')
                             ->join('weir_locations', 'weir_surveys.weir_location_id', '=', 'weir_locations.weir_location_id')
                             ->select('weir_surveys.weir_id')->where('weir_locations.weir_district',$amp)->where('downprotection_invs.section_status',$i)->get()->count();
 
                             
-                $eq[$i][6] = DB::table('waterdelivery_invs')
+                $e[$i][6] = DB::table('waterdelivery_invs')
                             ->join('weir_surveys', 'waterdelivery_invs.weir_id', '=', 'weir_surveys.weir_id')
                             ->join('weir_locations', 'weir_surveys.weir_location_id', '=', 'weir_locations.weir_location_id')
                             ->select('weir_surveys.weir_id')->where('weir_locations.weir_district',$amp)->where('waterdelivery_invs.section_status',$i)->get()->count();
 
             }
-            for ($i = 1; $i < 6; $i++) {
-                $e[0][$i]=$eq[1][$i];
-                $e[1][$i]=$eq[2][$i];
-                $e[2][$i]=$eq[3][$i];
-            }
         }
-        // dd($e);
+
+
         $head = [
             "-", "1. ส่วน Protection เหนือน้ำ",
             "2. ส่วนเหนือน้ำ", "3. ส่วนควบคุมน้ำ",
@@ -153,20 +117,19 @@ class ChartReportController extends Controller
             "4. ส่วนท้ายน้ำ", "5. ส่วน Protection ท้ายน้ำ", "6. ระบบส่งน้ำ"
         ];
 
+
         $countBar = [
             ["name" => "ใช้งานได้ดี", "data" => [$e[0][1], $e[0][2], $e[0][3], $e[0][4], $e[0][5], $e[0][6]] ],
             ["name" => "ปานกลาง ควรซ่อมแซมปรับปรุง", "data" => [$e[1][1], $e[1][2], $e[1][3], $e[1][4], $e[1][5], $e[1][6]]],
             ["name" => "ทรุดโทรม ควรรื้อถอน/ก่อสร้างใหม่", "data" => [$e[2][1], $e[2][2], $e[2][3], $e[2][4], $e[2][5], $e[2][6]]]
-        ];
-
-                
+        ];         
 
         if ($amp == "sum") {
-            $amp_name = "จังหวัดเชียงใหม่";
+            $amp_name = "จังหวัดลำปาง";
         } else {
-            $amp_name = "อำเภอ" . $amp . " จังหวัดเชียงใหม่";
+            $amp_name = "อำเภอ" . $amp . " จังหวัดลำปาง";
         }
-        
+
         return view('scorereport.chart', compact('result', 'e', 'head', 'countNum', 'countBar', 'head1', 'amp_name'));
     }
 
