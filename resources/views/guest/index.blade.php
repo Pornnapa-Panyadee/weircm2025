@@ -2,7 +2,7 @@
 <html lang="en">
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8">
-    <meta name="asset-path" content="{{ asset('/weir/chiangmai/') }}">
+    <meta name="asset-path" content="{{ asset('/') }}">
     <title>ChiangMai Weir </title>
 
     <link rel="icon" href="{{ asset('images/icon/favicon1.ico')}}" type="image/x-icon">
@@ -127,7 +127,7 @@
                         <div class="col-md-12">
                           <div class="card table-card">
                             <div class="card-header">
-                              <h4>โครงการพัฒนาระบบสารสนเทศการตรวจประเมินสภาพฝายและการบริหารจัดารพื้นที่เสี่ยงภัยแล้งและน้ำท่วมในจังหวัดเชียงใหม่</h4>
+                              <h4>โครงการพัฒนาระบบสารสนเทศการตรวจประเมินสภาพฝายและการบริหารจัดการพื้นที่เสี่ยงภัยแล้งและน้ำท่วมในจังหวัดเชียงใหม่</h4>
                               โดย องค์การบริหารส่วนจังหวัดเชียงใหม่ ร่วมกับ มหาวิทยาลัยเชียงใหม่                            
                               
                               <!-- Map Show -->
