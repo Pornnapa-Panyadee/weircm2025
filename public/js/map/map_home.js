@@ -29,7 +29,7 @@ var osmBw = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', 
 
 
 
-var runLayer = omnivore.kml(assetPath('../kml/CM_bound-25-amp.kml')).on('ready', function () {
+var runLayer = omnivore.kml(assetPath('kml/CM_bound-25-amp.kml')).on('ready', function () {
     this.setStyle({
         fillOpacity: 0,
         color: "#466DF3",
@@ -38,7 +38,7 @@ var runLayer = omnivore.kml(assetPath('../kml/CM_bound-25-amp.kml')).on('ready',
 }).addTo(borders);
 
 var pin = L.icon({
-    iconUrl: assetPath('../images/icon/pin19.png'),
+    iconUrl: assetPath('images/icon/pin19.png'),
     iconRetinaUrl: assetPath('images/icon/pin19.png'),
     iconSize: [30, 40],
     iconAnchor: [20, 40],
@@ -46,7 +46,7 @@ var pin = L.icon({
 });
 
 var pinMO = L.icon({
-    iconUrl: assetPath('../images/icon/pin19.png'),
+    iconUrl: assetPath('images/icon/pin19.png'),
     iconRetinaUrl: assetPath('images/icon/pin19.png'),
     iconSize: [25, 34],
     iconAnchor: [5, 30],
@@ -121,5 +121,5 @@ ctl.setOverlayTree(overlays).collapseTree(true).expandSelected(true);
 
 function assetPath(path) {
     const base = document.querySelector('meta[name="asset-path"]').getAttribute('content');
-    return new URL(path, window.location.origin + base).toString();
+    return new URL(path, base).href;
 }
