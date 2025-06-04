@@ -260,13 +260,13 @@
             <tr>
                 <td class="line"><font class="outline">ผู้ตรวจสอบ&nbsp;&nbsp;</font>&nbsp;&nbsp;<?php echo $weir[0]->survey_name; ?> &nbsp;</td>
                 <td colspan="2" class="line"><font class="outline"> วัน/เดือน/ปี </font> &nbsp;&nbsp;<?php echo DateTimeThai($weir[0]->survey_date); ?> &nbsp;&nbsp; </td>
-                <td class="line"><font class="outline">ตำแหน่ง </font> &nbsp;&nbsp; <?php echo $weir[0]->survey_position ?> &nbsp;&nbsp;  </td>
+                <td class="line"><font class="outline">ตำแหน่ง </font> &nbsp;&nbsp; &nbsp;&nbsp;  </td>
                 <td class="line"><font class="outline">หน่วยงาน </font> &nbsp;&nbsp; <?php echo $weir[0]->survey_unit ?>  &nbsp;&nbsp;  </td>
             </tr>
           </table>
           <table>
             <tr>
-                <td class="line"><font class="outline">ตำแหน่งที่&nbsp;&nbsp;</font>&nbsp;&nbsp;&nbsp;</td>
+                <td class="line"><font class="outline">ตำแหน่งที่&nbsp;&nbsp;</font>&nbsp;&nbsp; <?php echo $weir[0]->survey_position ?>&nbsp;</td>
                 <td colspan="2" class="line"><font class="outline"> ชื่อฝาย </font> &nbsp;&nbsp;<?php echo $weir[0]->weir_name ?>&nbsp;&nbsp; </td>
                 <td class="line"><font class="outline">ชื่อลำน้ำ </font> &nbsp;&nbsp;<?php echo $river[0]->river_name ?> &nbsp;&nbsp;  </td>
                 <td class="line"><font class="outline">ลำน้ำสาขาของ </font> &nbsp;&nbsp;<?php echo $river[0]->river_branch	?> &nbsp;&nbsp;  </td>
