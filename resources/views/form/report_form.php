@@ -2010,12 +2010,7 @@
                 </table>
             </div>
         <div class="text3">6. ความเห็นและข้อสังเกตเพิ่มเติม </div>
-                <div class="text4" > 
-                    <textarea rows="50" cols="200" style="border: none">
-                        <font class="line"><?php echo $sug[0]->suggestion?></font>
-                    </textarea>
-                </div>
-        </div>
+        <div class="text4" >  <?php echo $sug[0]->suggestion?></div>
         <br>
         <div class="page-break"></div>
             <div class="text3" >7. รูปประกอบ </div>
