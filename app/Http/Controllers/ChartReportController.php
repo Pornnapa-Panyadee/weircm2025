@@ -125,9 +125,9 @@ class ChartReportController extends Controller
         ];         
 
         if ($amp == "sum") {
-            $amp_name = "จังหวัดลำปาง";
+            $amp_name = "จังหวัดเชียงใหม่";
         } else {
-            $amp_name = "อำเภอ" . $amp . " จังหวัดลำปาง";
+            $amp_name = "อำเภอ" . $amp . " จังหวัดเชียงใหม่";
         }
 
         return view('scorereport.chart', compact('result', 'e', 'head', 'countNum', 'countBar', 'head1', 'amp_name'));

@@ -235,7 +235,7 @@
                                             <div class="form-group row">
                                               <label class="col-sm-2 col-form-label">ตำแหน่ง</label>
                                               <div class="col-sm-4">
-                                                <input id="survey_position" name="survey_position" type="text" class=" form-control" placeholder="-- กรอกตำแหน่ง --" value="-">
+                                                <input id="survey_position" name="survey_position" type="text" class=" form-control" placeholder="-- กรอกตำแหน่ง --" >
                                               </div>
                                               <label class="col-sm-2 col-form-label">หน่วยงาน</label>
                                               <div class="col-sm-4">
