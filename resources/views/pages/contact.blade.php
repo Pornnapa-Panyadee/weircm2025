@@ -76,7 +76,7 @@
                                                 <div class="col-md-10 col-lg-10">
                                                     <div class="card">
                                                         <div class="card-block">
-                                                            <center><td> <a href="https://cendim.eng.cmu.ac.th/">  <img src="{{ asset('images/footer/cendim.jpg') }}" width="30%"></a></td> </center><br>
+                                                            <center><td> <a href="https://cendim.eng.cmu.ac.th/">  <img src="{{ asset('images/footer/cendim.png') }}" width="30%"></a></td> </center><br>
                                                             <div align="center" style="margin-left:30px;">
                                                                 <h2 style="font-size:1.6vw"> ศูนย์ความเป็นเลิศด้านการจัดการภัยพิบัติทางธรรมชาติ คณะวิศวกรรมศาสตร์  มหาวิทยาลัยเชียงใหม่ </h2>
                                                             

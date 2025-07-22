@@ -156,6 +156,8 @@ class ReportPDFController extends Controller
                         ];
                 }
             }
+
+            // dd($sug);
             $pdf = PDF::loadView('form.report_form',compact('mt','weir','location','districtData','river','model','locationUTM','locationLat','space','upprotection','upconcrete','control','downconcrete','downprotection','waterdelivery','plan','maintain','sug','photo1','photo2','photo3','photo4','photo5','photo6'));
             return $pdf->stream('survey.pdf');
 
@@ -940,7 +942,8 @@ class ReportPDFController extends Controller
     }
 
     public function reportpdf_warning($weir_id=0) {
-        return view('guest.warning'); 
+        // return view('guest.warning'); 
+        return view('guest.underconstruction'); 
         
     }
 
