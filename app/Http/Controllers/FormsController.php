@@ -340,9 +340,11 @@ class FormsController extends Controller
           $suggest_id="S".calCode($suggest_id_last,"suggest_id");
           //dd($river_id_last);
           $vill=explode(" ",$request->weir_village);
-          //dd($request->weir_village);
-          $code =DB::table('locations')->select('vill_code')->where('vill_name',$vill[2] )->where('vill_moo',$vill[1])->get();
-          
+          if(count($vill)<4){
+            $code =DB::table('locations')->select('vill_code')->where('vill_name',$vill[2] )->where('vill_moo',$vill[1])->get();
+          }else{
+            $code =DB::table('locations')->select('vill_code')->where('vill_name',$vill[2]. " " . $vill[3] )->where('vill_moo',$vill[1])->get();
+          }
           $codeweir="W".$code[0]->vill_code.'%';       
           $weircode = DB::table('weir_surveys')->select('weir_code')->where('weir_code','like',$codeweir)->get();
           $wcode = DB::table('weir_surveys')->select('weir_code')->where('weir_code','like',$codeweir)->get()->last();
