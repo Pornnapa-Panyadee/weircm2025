@@ -46,15 +46,15 @@ Route::POST('/report/problemAmp/pdf', 'App\Http\Controllers\ReportPDFController@
 // ------Tab 1 Info Weir  ------
 
 // ------Tab 2 Info sediment  ------
-Route::get('/report/sediment', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
-Route::get('/report/sedimentTable','App\Http\Controllers\ReportPDFController@reportpdf_warning');
-Route::POST('/report/sediment_upconcrete/pdf', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+// Route::get('/report/sediment', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+// Route::get('/report/sedimentTable','App\Http\Controllers\ReportPDFController@reportpdf_warning');
+// Route::POST('/report/sediment_upconcrete/pdf', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
 
 
-// Route::get('/report/sediment', 'App\Http\Controllers\MapScoreController@sedimentscore');
-// Route::get('/report/sedimentTable', function () {return view('scorereport.sediment_table');});
-// Route::POST('/report/sediment_upconcrete/pdf', 'App\Http\Controllers\ReportPDFController@sedimentUpconcrete')->name('sediment.pdf');
-// //Route::get('/report/sedimentTable', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+Route::get('/report/sediment', 'App\Http\Controllers\MapScoreController@sedimentscore');
+Route::get('/report/sedimentTable', function () {return view('scorereport.sediment_table');});
+Route::POST('/report/sediment_upconcrete/pdf', 'App\Http\Controllers\ReportPDFController@sedimentUpconcrete')->name('sediment.pdf');
+//Route::get('/report/sedimentTable', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
 // ------Tab 2 Info sediment  ------
 
 // ------ Map data to Display------
