@@ -12,8 +12,8 @@ Route::get('/register', function () {
 });
 #Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // ----- Guest -----
-// Route::get('/', 'App\Http\Controllers\DataSurveyController@getDataHomeTable');
-Route::get('/', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+Route::get('/', 'App\Http\Controllers\DataSurveyController@getDataHomeTable');
+// Route::get('/', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
 // ----- Guest -----
 
 
@@ -28,15 +28,15 @@ Route::get('location/getVillage/{amp}/{tambol}', 'App\Http\Controllers\LocationC
 // ------Location------
 
 // ------Tab 1 Info Weir  ------
-Route::get('/report/map', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
-Route::get('/report/chart', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
-Route::get('/report/scoreComposition', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
-Route::get('/report/problem', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+// Route::get('/report/map', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+// Route::get('/report/chart', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+// Route::get('/report/scoreComposition', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
+// Route::get('/report/problem', 'App\Http\Controllers\ReportPDFController@reportpdf_warning');
 
-// Route::get('/report/map', 'App\Http\Controllers\MapScoreController@scoretable');
-// Route::get('/report/chart', 'App\Http\Controllers\ChartReportController@score');
-// Route::get('/report/scoreComposition', function () {return view('scorereport.scorelist');});
-// Route::get('/report/problem', function () {return view('scorereport.problemlist');});
+Route::get('/report/map', 'App\Http\Controllers\MapScoreController@scoretable');
+Route::get('/report/chart', 'App\Http\Controllers\ChartReportController@score');
+Route::get('/report/scoreComposition', function () {return view('scorereport.scorelist');});
+Route::get('/report/problem', function () {return view('scorereport.problemlist');});
 
 //report รายงานสรุปผลสภาพของฝายแต่ละองค์ประกอบ 
 Route::POST('/report/scoreComposition/pdf', 'App\Http\Controllers\ReportPDFController@compositionWeir')->name('report.pdf');
