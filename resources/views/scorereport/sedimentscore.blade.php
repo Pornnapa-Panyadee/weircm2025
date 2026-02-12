@@ -274,11 +274,12 @@
       var x = 18.690015;
       var y = 98.656525;
 
-      var mbAttr = 'Mae Jang Basin ',
-          mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidmFucGFueWEiLCJhIjoiY2loZWl5ZnJ4MGxnNHRwbHp5bmY4ZnNxOCJ9.IooQB0jYS_4QZvIq7gkjeQ';
-          osm = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+      const MAPBOX_TOKEN = @json(config('services.mapbox.token')); 
+      var mbAttr = 'Chiang Mai ', 
+            mbUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${MAPBOX_TOKEN}`;
+            osm = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
               maxZoom: 20,subdomains:['mt0','mt1','mt2','mt3'], attribution: mbAttr });
-          osmBw = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+            osmBw = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
                 maxZoom: 20,subdomains:['mt0','mt1','mt2','mt3'], attribution: mbAttr });
    
 
@@ -354,17 +355,23 @@
                   text1 ="<font style=\"font-family: 'Mitr';\" size=\"2\"COLOR=#466DF3 > ฝาย : "+ data[i].weir_name+ " (ลำน้ำ : "+ data[i].river+")</font><br>";
                   text2 ="<font style=\"font-family: 'Mitr';\" size=\"2\"COLOR=#466DF3 >ที่ตั้ง : "+ data[i].weir_village +" ต."+ data[i].weir_tumbol +" อ."+ data[i].weir_district +"</font><br>";
                   text3 ="<br><table align=\"center\"><tr><td >" + "<a href='{{ asset('report/pdf') }}/"+data[i].weir_code+"' target=\"_blank\"><button class=\"btn btn-primary btn-sm waves-effect waves-light\"><i class=\"feather icon-sidebar\"></i> รายงาน</button> </a></td> <td> <a href='{{ asset('/pdf') }}/"+data[i].weir_code+"' target=\"_blank\">  "+"<button class=\"btn btn-primary btn-sm waves-effect waves-light\"><i class=\"feather icon-eye\"></i> แบบสำรวจ</button> </a>" +"</td><td > <a href='{{ asset('/photo') }}/"+data[i].weir_code+"' target=\"_blank\">  " + "<button class=\"btn btn-primary btn-sm waves-effect waves-light\"><i class=\"feather icon-image\"></i> ภาพประกอบ</button> </a></td></tr></table>";
-              if(c=="3"){
+              if(c=="2"){
                 if(mo==0){
                     L.marker([x,y],{icon: pinMO_Y}).addTo(ampName).bindPopup(text+text1+text2+text3);  
                 }else{
                     L.marker([x,y],{icon: pin_Y}).addTo(ampName).bindPopup(text+text1+text2+text3);  
                 }
-              }else if(c=="4"){
+              }else if(c=="3"){
                 if(mo==0){
                     L.marker([x,y],{icon: pinMO_O}).addTo(ampName).bindPopup(text+text1+text2+text3);  
                 }else{
                     L.marker([x,y],{icon: pin_O}).addTo(ampName).bindPopup(text+text1+text2+text3);  
+                }
+              }else if(c=="4"){
+                if(mo==0){
+                    L.marker([x,y],{icon: pinMO_R}).addTo(ampName).bindPopup(text+text1+text2+text3);  
+                }else{
+                    L.marker([x,y],{icon: pin_R}).addTo(ampName).bindPopup(text+text1+text2+text3);  
                 }
               }else {
                 if(mo==0){
