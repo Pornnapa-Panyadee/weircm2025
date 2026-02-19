@@ -4,6 +4,8 @@ var station5 = new L.LayerGroup(); var station6 = new L.LayerGroup();
 var station7 = new L.LayerGroup(); var station8 = new L.LayerGroup();
 var station9 = new L.LayerGroup(); var station10 = new L.LayerGroup();
 var station11 = new L.LayerGroup(); var station12 = new L.LayerGroup();
+var station13 = new L.LayerGroup(); var station14 = new L.LayerGroup();
+var station15 = new L.LayerGroup();
 
 
 var loyal = new L.LayerGroup();
@@ -53,7 +55,23 @@ var pinMO = L.icon({
     popupAnchor: [0, 0]
 });
 
-var amp = ["เมืองเชียงใหม่", "สันกำแพง", "แม่ริม", "แม่อาย", "สันทราย", "ดอยสะเก็ด", "แม่ออน", "แม่อาย", "สารภี", "หางดง", "สันป่าตอง", "ดอยหล่อ", "แม่วาง", "สะเมิง"];
+var amp = [
+            "เชียงดาว",
+            "ดอยสะเก็ด",
+            "ดอยหล่อ",
+            "ฝาง",
+            "เมืองเชียงใหม่",
+            "แม่อาย",
+            "แม่ออน",
+            "แม่ริม",
+            "แม่วาง",
+            "สันกำแพง",
+            "สันทราย",
+            "สันป่าตอง",
+            "สารภี",
+            "สะเมิง",
+            "หางดง"
+        ];
 
 function checkname(name) {
     return name ?? "- ";
@@ -110,7 +128,7 @@ var overlays = [{
 
 
 var map = L.map('map', {
-    layers: [osm, station1, station2, station3, station4, station5, station6, station7, station8, station9, station10, station11, station12, borders],
+    layers: [osm, station1, station2, station3, station4, station5, station6, station7, station8, station9, station10, station11, station12,station13,station14,station15, borders],
     center: [x, y],
     zoom: 8
 });
