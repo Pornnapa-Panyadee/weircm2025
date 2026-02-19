@@ -248,12 +248,14 @@
     <script src="{{ asset('/js/L.Control.Layers.Tree.js')}}"></script>
 
     <script type="text/javascript">
-       var station1 = new L.LayerGroup();var station2 = new L.LayerGroup();
+     var station1 = new L.LayerGroup();var station2 = new L.LayerGroup();
       var station3 = new L.LayerGroup();var station4 = new L.LayerGroup();
       var station5 = new L.LayerGroup();var station6 = new L.LayerGroup();
       var station7 = new L.LayerGroup();var station8 = new L.LayerGroup();
       var station9 = new L.LayerGroup();var station10 = new L.LayerGroup();
       var station11 = new L.LayerGroup();var station12 = new L.LayerGroup();
+      var station13 = new L.LayerGroup();var station14 = new L.LayerGroup();
+      var station15 = new L.LayerGroup();
 
       var station19 = new L.LayerGroup();var station20 = new L.LayerGroup();
       var station21 = new L.LayerGroup();var station22 = new L.LayerGroup();
@@ -261,6 +263,8 @@
       var station25 = new L.LayerGroup();var station26 = new L.LayerGroup();
       var station27 = new L.LayerGroup();var station28 = new L.LayerGroup();
       var station29 = new L.LayerGroup();var station30 = new L.LayerGroup();
+      var station31 = new L.LayerGroup();var station32 = new L.LayerGroup();
+      var station33 = new L.LayerGroup();
 
       var station37 = new L.LayerGroup();var station38 = new L.LayerGroup();
       var station39 = new L.LayerGroup();var station40 = new L.LayerGroup();
@@ -268,7 +272,10 @@
       var station43 = new L.LayerGroup();var station44 = new L.LayerGroup();
       var station45 = new L.LayerGroup();var station46 = new L.LayerGroup();
       var station47 = new L.LayerGroup();var station48 = new L.LayerGroup();
+      var station49 = new L.LayerGroup();var station50 = new L.LayerGroup();
+      var station51 = new L.LayerGroup();
 
+        
       var loyal = new L.LayerGroup();
       var borders= new L.LayerGroup();
       var x = 18.690015;
@@ -340,8 +347,24 @@
           popupAnchor: [0, 0]
         });
 
-      var amp = [ "เมืองเชียงใหม่","สันกำแพง","แม่ริม", "สันทราย","ดอยสะเก็ด", "แม่ออน", "แม่อาย", "สารภี", "หางดง", "สันป่าตอง","ดอยหล่อ","แม่วาง","สะเมิง"]; 
-      
+     var amp = [
+            "เชียงดาว",
+            "ดอยสะเก็ด",
+            "ดอยหล่อ",
+            "ฝาง",
+            "เมืองเชียงใหม่",
+            "แม่อาย",
+            "แม่ออน",
+            "แม่ริม",
+            "แม่วาง",
+            "สันกำแพง",
+            "สันทราย",
+            "สันป่าตอง",
+            "สารภี",
+            "สะเมิง",
+            "หางดง"
+        ];
+        
       function addPin(ampName,i,c,mo){
           $.getJSON("{{ asset('sedimentscore') }}/"+amp[i]+"/"+c, 
           function (data){
@@ -410,6 +433,9 @@
         addPin(station10,9,"2",mo);
         addPin(station11,10,"2",mo);
         addPin(station12,11,"2",mo);
+        addPin(station13,12,"2",mo);
+        addPin(station14,13,"2",mo);
+        addPin(station15,14,"2",mo);
 
         addPin(station19,0,"3",mo);
         addPin(station20,1,"3",mo);
@@ -423,6 +449,10 @@
         addPin(station28,9,"3",mo);
         addPin(station29,10,"3",mo);
         addPin(station30,11,"3",mo);
+        addPin(station31,12,"3",mo);
+        addPin(station32,13,"3",mo);
+        addPin(station33,14,"3",mo);
+
 
         addPin(station37,0,"4",mo);
         addPin(station38,1,"4",mo);
@@ -436,6 +466,10 @@
         addPin(station46,9,"4",mo);
         addPin(station47,10,"4",mo);
         addPin(station48,11,"4",mo);
+        addPin(station49,12,"4",mo);
+        addPin(station50,13,"4",mo);
+        addPin(station51,14,"4",mo);
+
 
 
       var baseTree = {
@@ -466,6 +500,9 @@
                 { label:" "+amp[9],layer: station10},
                 { label:" "+amp[10],layer: station11},
                 { label:" "+amp[11],layer: station12},
+                { label:" "+amp[12],layer: station13},
+                { label:" "+amp[13],layer: station14},
+                { label:" "+amp[14],layer: station15},
           ]
         },
         {
@@ -484,6 +521,9 @@
                 { label:" "+amp[9],layer: station28},
                 { label:" "+amp[10],layer: station29},
                 { label:" "+amp[11],layer: station30},
+                { label:" "+amp[12],layer: station31},
+                { label:" "+amp[13],layer: station32},
+                { label:" "+amp[14],layer: station33},
           ]
         },
         {
@@ -502,13 +542,16 @@
                 { label:" "+amp[9],layer: station46},
                 { label:" "+amp[10],layer: station47},
                 { label:" "+amp[11],layer: station48},
+                { label:" "+amp[12],layer: station49},
+                { label:" "+amp[13],layer: station50},
+                { label:" "+amp[14],layer: station51},
           ]
         }
       ];
       
       var map = L.map('map', {
-          layers: [osm,station1,station2,station3,station4,station5,station6,station7,station8,station9,station10,station11,station12,station19,station20,station21,station22,station23,station24,station25,station26,station27,station28,station29,station30,
-                  station37,station38,station39,station40,station41,station42,station43,station44,station45,station46,station47,station48,borders],
+          layers: [osm,station1,station2,station3,station4,station5,station6,station7,station8,station9,station10,station11,station12,station13,station14,station15,station19,station20,station21,station22,station23,station24,station25,station26,station27,station28,station29,station30,station31,station32,station33,
+                  station37,station38,station39,station40,station41,station42,station43,station44,station45,station46,station47,station48,station49,station50,station51,borders],
           center: [x,y],
           zoom: 8,
         });
