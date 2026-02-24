@@ -311,7 +311,7 @@ class MapScoreController extends Controller
     public function scoretable()
     {
         $amp = [
-            "เชียงดาว",
+            "ไชยปราการ",
             "ดอยสะเก็ด",
             "ดอยหล่อ",
             "ฝาง",
@@ -382,7 +382,7 @@ class MapScoreController extends Controller
     public function sedimentscore()
     {
         $amp = [
-            "เชียงดาว",
+            "ไชยปราการ",
             "ดอยสะเก็ด",
             "ดอยหล่อ",
             "ฝาง",
