@@ -237,22 +237,13 @@ class DataSurveyController extends Controller
     public function getDataHomeTable(Request $request) {
         $data=[];
         $dataUser=[];
-        $screenWidth = $this->calculateScreenWidth();
-        if($screenWidth<= 768){
-            if($request->amp=="ห้างฉัตร" || empty($request->amp)){
-                $request->amp="ห้างฉัตร";
-            }elseif($request->amp=="sum"){
-                $request->amp=empty($request->amp);
-            }else{
-                $request->amp=$request->amp;
-            }
-        }else{
-            if($request->amp=="sum" || empty($request->amp)){
+        if($request->amp=="sum" || empty($request->amp)){
                 $request->amp=NULL;
-            }else{
+        }else{
                 $request->amp=$request->amp;
-            }
         }
+        $screenWidth = $this->calculateScreenWidth();
+        
         if(!empty($request->amp)){
             if(!empty($request->tumbol)){
                 $location = WeirLocation::select('*')->where('weir_district',$request->amp)->where('weir_tumbol',$request->tumbol)->get();
@@ -306,7 +297,7 @@ class DataSurveyController extends Controller
         
         // dd($data1[0]['data']);
         
-        // dd($data);
+        //dd($data);
         $district['name']=Location::getprovinceDistrict();
         // dd($district);
         return view('guest.index',compact('data','district'));      
